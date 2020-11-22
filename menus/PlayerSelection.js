@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    StyleSheet, Text, View, ImageBackground
+    StyleSheet, Text, View, ImageBackground, Image, FlatList
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -8,14 +8,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import LogoArea from '../components/LogoArea.js'
 import Button from '../components/Button.js'
 import { Component } from 'react';
-import GameBackground from '../components/GameBackground.js';
+import PLAYERLIST from '../playerInfo/PlayerList'
+import Player from '../components/Player.js';
+
 
 
 export default class PlayerSelection extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
 
-                <ImageBackground source={require('../assets/iglou_motif.png')} style={styles.background_image}>
+            <ImageBackground source={require('../assets/iglou_motif.png')} style={styles.background_image}>
                 <LinearGradient
                     // Background Linear Gradient
                     colors={['transparent', 'rgba(0,0,0,0.4)']}
@@ -29,9 +31,26 @@ export default class PlayerSelection extends React.Component {
                 />
                 <View style={styles.container}>
                     <StatusBar style="light" />
-                    <GameBackground/>
+
+
+                    {/* top logo + white area */}
+                    <View style={styles.main_container}>
+                        <View style={styles.logo_area}>
+                            <Image source={require("../assets/logo_light_inline.png")}
+                                style={styles.logo_style} />
+                        </View>
+                        {/* white area */}
+                        <View style={styles.game_area}>
+                            <FlatList
+                                data={PLAYERLIST}
+                                keyExtractor={(item) => item.id}
+                                renderItem={({ item }) => <Player  />}
+                            />
+                        </View>
+                    </View>
                 </View>
-            </ImageBackground>
+
+            </ImageBackground >
         );
     }
 }
@@ -51,4 +70,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    main_container: {
+        flex: 10,
+        alignItems: 'center'
+    },
+    logo_area: {
+        flex: 1,
+    },
+    logo_style: {
+        flex: 1,
+        width: 200,
+        resizeMode: 'contain',
+    },
+    game_area: {
+        marginTop: 20,
+        flex: 7,
+        backgroundColor: '#ffffff',
+        width: 300,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+    }
 });
