@@ -3,10 +3,6 @@ import {
   View, Text, TouchableOpacity,Linking
 }from 'react-native'
 
-function actionNulle(){
-  console.log("Default Action")
-}
-
 /* Usage du composant :
   import Button from "./components/Button.js"
   <Button

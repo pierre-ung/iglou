@@ -17,7 +17,7 @@ const AppStackNav = createStackNavigator(
     },
 },
 {
-    initialRouteName: 'MainMenu', 
+    initialRouteName: 'MainMenu',
     defaultNavigationOptions: {
         ...TransitionPresets.SlideFromRightIOS,
         headerShown: false,

@@ -4,7 +4,7 @@ import {StyleSheet, View, Image, Text} from "react-native"
 function LogoArea(){
   return(
     <View style={styles.logo_area}>
-      <Image  source={require("../assets/logo_iglou.png")}
+      <Image  source={require("../assets/logo_light_big.png")}
               style={styles.logo_style}/>
     </View>
 )}
@@ -12,7 +12,7 @@ function LogoArea(){
 const styles = StyleSheet.create({
   logo_style: {
     flex: 1,
-    width:300,
+    width:250,
     resizeMode: 'contain',
   },
   logo_area: {
