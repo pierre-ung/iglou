@@ -1,72 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+//Components homemade
+import LogoArea from './components/LogoArea.js'
+import Button from './components/Button.js'
 
 export default function App() {
   return (
+    <ImageBackground source={require('./assets/iglou_motif.png')} style={styles.background_image}>
     <View style={styles.container}>
-      <StatusBar style="auto" />
-      <View style={styles.logo_area}>
-        <Image  source={require("./assets/main_logo.png")} 
-                style={styles.logo_style}/>
-        <Text style={styles.app_name}>IGLOU</Text>
-      </View>
+      <StatusBar style="light" />
+      <LogoArea />
       <View style={styles.nav_menu_area}>
-        <TouchableOpacity
-          //onPress
-          style={styles.play_button}>
-            <Text style={styles.text_play}>PLAY !</Text>
-        </TouchableOpacity>
-        <Text onPress={() => console.log("Text pressed !")}
-              style={styles.tip_button}>
-          Buy us a drink !
-        </Text>
-              
+        <Button color='#ff4e47' text="Play!" onPress={() => console.log("ACTION CUSTOM")}/>
+        <Button text="Buy us a drink !"/>
       </View>
 
     </View>
+  </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background_image:{
     flex: 1,
-    backgroundColor: '#121A34',
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  container: {
+    paddingTop: '20%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo_style: {
-    flex: 5, 
-    width : 200
-  },
-  logo_area: {
-    marginTop: 50,
-    flex: 1,
-    alignItems: 'center',
-    marginBottom: 75
-  },
-  app_name: {
-    color: 'white',
-    fontSize:30,
-  },
   nav_menu_area:{
+    paddingTop: '5%',
     flex: 1,
     width: "80%",
     borderRadius: 50,
     alignItems:"center"
-  },
-  play_button:{
-    width: '100%',
-    backgroundColor: '#FF4E47',
-    height: '20%',
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 50
-  },
-  text_play: {
-    color: 'white',
-    fontSize: 24
   },
   tip_button: {
     color: 'white',
