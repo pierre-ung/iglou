@@ -43,7 +43,7 @@ class Button extends React.Component {
     HandleClick() {
       //this.switch()
       if (this.state.onPress){
-        return onPress
+        return this.state.onPress
       }else if (this.props.url){
         return (
           ()=>{

@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import LogoArea from '../components/LogoArea.js';
 import Button from '../components/Button.js';
 export default class MainMenu extends React.Component {
-    
+
     render() {
         const { navigate } = this.props.navigation
         return (
@@ -29,7 +29,7 @@ export default class MainMenu extends React.Component {
                     <LogoArea />
                     <View style={styles.nav_menu_area}>
                         <Button color='#ff4e47' text="Play!" onPress={() => navigate('PlayerSelect')}/>
-                        <Button text="Buy us a drink !" />
+                        <Button text="Buy us a drink !" url="https://paypal.me/jeanung"/>
                     </View>
 
                 </View>
