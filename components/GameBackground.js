@@ -9,7 +9,7 @@ export default class GameBackground extends React.Component{
         return(
             <View style={styles.main_container}>
                 <View style={styles.logo_area}>
-                <Image  source={require("../assets/logo_iglou.png")}
+                <Image  source={require("../assets/logo_light_inline.png")}
                         style={styles.logo_style}/>
                 </View>
                 
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
     },
     logo_style: {
         flex: 1,
-        width:100,
+        width:200,
         resizeMode: 'contain',
     },
     game_area:{
         marginTop: 20,
-        flex: 6,
-        backgroundColor: '#fff4ef',
+        flex: 7,
+        backgroundColor: '#ffffff',
         width: 300,
         height: 10000,
         borderTopLeftRadius: 50,
