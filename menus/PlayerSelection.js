@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import LogoArea from '../components/LogoArea.js'
 import Button from '../components/Button.js'
 import { Component } from 'react';
+import GameBackground from '../components/GameBackground.js';
 
 
 export default class PlayerSelection extends React.Component {
@@ -28,7 +29,7 @@ export default class PlayerSelection extends React.Component {
                 />
                 <View style={styles.container}>
                     <StatusBar style="light" />
-
+                    <GameBackground/>
                 </View>
             </ImageBackground>
         );
