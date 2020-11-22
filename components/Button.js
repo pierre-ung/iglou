@@ -28,7 +28,7 @@ class Button extends React.Component {
     }
 
     //Switch l'état disabled
-    switch(){
+    switchState(){
       this.setState(prevState => {
         console.log(prevState.disabled)
         return {disabled : !prevState.disabled}
@@ -43,7 +43,10 @@ class Button extends React.Component {
           return this.props.onPress
         }else{
           return (
-            ()=>console.log(`Bouton "${this.state.text}" cliqué`)
+            ()=>{
+              console.log(`Bouton "${this.state.text}" cliqué`)
+              this.switchState()
+            }
           )
         }
     }

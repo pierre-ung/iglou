@@ -3,6 +3,7 @@ import {
   StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
 //Components homemade
 import LogoArea from './components/LogoArea.js'
 import Button from './components/Button.js'
@@ -10,16 +11,27 @@ import Button from './components/Button.js'
 export default function App() {
   return (
     <ImageBackground source={require('./assets/iglou_motif.png')} style={styles.background_image}>
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <LogoArea />
-      <View style={styles.nav_menu_area}>
-        <Button color='#ff4e47' text="Play!" onPress={() => console.log("ACTION CUSTOM")}/>
-        <Button text="Buy us a drink !"/>
-      </View>
+        <LinearGradient
+          // Background Linear Gradient
+          colors={['transparent', 'rgba(0,0,0,0.4)']}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: '60%',
+            height: '40%',
+          }}
+        />
+      <View style={styles.container}>
+        <StatusBar style="light" />
+        <LogoArea />
+        <View style={styles.nav_menu_area}>
+          <Button color='#ff4e47' text="Play!"/>
+          <Button text="Buy us a drink !"/>
+        </View>
 
-    </View>
-  </ImageBackground>
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -42,8 +54,4 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems:"center"
   },
-  tip_button: {
-    color: 'white',
-    fontSize: 24
-  }
 });
