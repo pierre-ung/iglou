@@ -39,6 +39,7 @@ export default class PlayerSelection extends React.Component {
 
 const styles = StyleSheet.create({
     background_image: {
+        margin: -1,
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center"
