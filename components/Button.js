@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  View, Text, TouchableOpacity,
+  View, Text, TouchableOpacity,Linking
 }from 'react-native'
 
 function actionNulle(){
@@ -14,6 +14,11 @@ function actionNulle(){
     text="Play!"
     onPress={ () => console.log("ACTION CUSTOM") //Fonction }
     />
+    /!\ Si aucune action n'est définie (url ou onPress) => Log :
+    Pas d'action définie pour le Bouton "${this.props.text}"
+    //onClick
+    Le Bouton "${this.props.text}" n'a pas d'action définie
+     ${this.state.text}.disabled set to ${!prevState.disabled}
 */
 
 class Button extends React.Component {
@@ -23,38 +28,48 @@ class Button extends React.Component {
           color: props.color,
           disabled: false,
           text: props.text,
+          onPress: this.props.onPress,
         }
         this.HandleClick = this.HandleClick.bind(this)
+    }
+
+    componentDidMount(){
+      if(!this.state.onPress && !this.props.url){
+        console.log(`Pas d'action définie pour le Bouton "${this.props.text}"` )
+      }
+    }
+
+    //Action lors du click
+    HandleClick() {
+      //this.switch()
+      if (this.state.onPress){
+        return onPress
+      }else if (this.props.url){
+        return (
+          ()=>{
+            this.openUrl();
+          }
+        )
+      }else{
+        return () => {
+          this.switchState()}
+      }
     }
 
     //Switch l'état disabled
     switchState(){
       this.setState(prevState => {
-        console.log(prevState.disabled)
+        if(!prevState.disabled){
+          console.log(`Le Bouton "${this.props.text}" n'a pas d'action définie
+           ${this.state.text}.disabled set to ${!prevState.disabled}`)
+        }
         return {disabled : !prevState.disabled}
         }
       )
     }
 
-    //Action lors du click
-    HandleClick() {
-        //this.switch()
-        if (this.props.onPress != null){
-          return this.props.onPress
-        }else{
-          return (
-            ()=>{
-              console.log(`Bouton "${this.state.text}" cliqué`)
-              this.switchState()
-            }
-          )
-        }
-    }
-
-    componentDidMount(){
-      if(this.props.onPress == null){
-        console.log("Pas d'action définie")
-      }
+    openUrl(){
+      Linking.openURL(this.props.url)
     }
 
     render() {
