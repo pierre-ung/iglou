@@ -44,7 +44,7 @@ export default class PlayerSelection extends React.Component {
                             <FlatList
                                 data={PLAYERLIST}
                                 keyExtractor={(item) => item.id}
-                                renderItem={({ item }) => <Player  />}
+                                renderItem={({ item }) => <Player  info={item}/>}
                             />
                         </View>
                     </View>

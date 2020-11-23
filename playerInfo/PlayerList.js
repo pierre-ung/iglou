@@ -2,11 +2,13 @@
 var PLAYERLIST = [
     {
         id: 0,
-        name: "Gloubi"
+        name: "Gloubi",
+        avatar_id: 0
     },
     {
         id: 1,
-        name: "Gloubo"
+        name: "Gloubo",
+        avatar_id: 1
     }
 ]
 
