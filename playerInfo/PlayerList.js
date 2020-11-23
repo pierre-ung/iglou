@@ -1,15 +1,13 @@
 // /!\ Remove tests names 
-var PLAYERLIST = [
+var id_cnt = 0
+var playerList = [
+    /* Element exemple
     {
         id: 0,
         name: "Gloubi",
         avatar_id: 0
-    },
-    {
-        id: 1,
-        name: "Gloubo",
-        avatar_id: 1
     }
+    */
 ]
 
-export default PLAYERLIST
+export default {playerList, id_cnt}

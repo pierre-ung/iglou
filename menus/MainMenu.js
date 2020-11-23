@@ -7,6 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 //Components homemade
 import LogoArea from '../components/LogoArea.js';
 import Button from '../components/Button.js';
+import AddPlayerButton from '../components/AddPlayerButton.js';
+import PLAYERLIST from '../playerInfo/PlayerList.js'
 export default class MainMenu extends React.Component {
 
     render() {
@@ -28,10 +30,11 @@ export default class MainMenu extends React.Component {
                     <StatusBar style="light" />
                     <LogoArea />
                     <View style={styles.nav_menu_area}>
-                        <Button color='#ff4e47' text="Play!" onPress={() => navigate('PlayerSelect')}/>
-                        <Button text="Buy us a drink !" url="https://paypal.me/jeanung"/>
+                        <Button color='#ff4e47' height={60} text="Play!" onPress={() => navigate('PlayerSelect')}/>
+                        <View style={{marginBottom: 10}}/> 
+                        <Button text="Buy us a drink !" height={60} url="https://paypal.me/jeanung"/>
                     </View>
-
+                    
                 </View>
             </ImageBackground>
         );

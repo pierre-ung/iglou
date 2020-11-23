@@ -5,7 +5,7 @@ import {
 import AVATARLIST from '../playerInfo/AvatarList'
 
 function resolveImageFromID(id){
-    let avatar = AVATARLIST.find(a => a.id == id);
+    let avatar = AVATARLIST.avatarList.find(a => a.id == id);
     return avatar.image;
 }
 
@@ -13,12 +13,12 @@ function resolveImageFromID(id){
 export default class Player extends React.Component{
     render(){
         const playerInfo = this.props.info
-        var avatar = resolveImageFromID(playerInfo.id);
+        var avatar = resolveImageFromID(playerInfo.avatar_id);
         return(
             <View style={styles.main_container}>
                 <Image  style={styles.avatar}
                         source={avatar} />
-                <Text>{playerInfo.name} </Text>
+                <Text style={styles.player_name}>{playerInfo.name} </Text>
             </View>
         );
     }
@@ -28,18 +28,20 @@ const styles = StyleSheet.create({
     main_container: {
         flex: 1,
         marginTop: 25,
-        marginLeft: 20,
         height: 50,
         flexDirection: 'row',
         alignItems: "center",
         backgroundColor: "lightgray",
         borderRadius: 25,
-        width: '85%'
     },
     avatar:{
         width: 70,
         resizeMode: 'contain',
         marginRight: 10
         
+    },
+    player_name:{
+        fontSize: 16,
+        color: "#555"
     }
 });
