@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet, Text, View, ImageBackground, Image, FlatList, ScrollView
+    StyleSheet, Text, View, ImageBackground, Image, FlatList, ScrollView, KeyboardAvoidingView
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,10 +11,12 @@ import { Component } from 'react';
 import PLAYERLIST from '../playerInfo/PlayerList'
 import Player from '../components/Player.js';
 import AddPlayerButton from '../components/AddPlayerButton.js'
-import { Overlay } from 'react-native-elements';
+import { Icon, Overlay } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import PlayerConfig from '../playerInfo/Config.js'
 import AVATARLIST from '../playerInfo/AvatarList.js';
+import KeyboardAccs from '../components/KeyboardAccs.js'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default class PlayerSelection extends React.Component {
@@ -27,9 +29,9 @@ export default class PlayerSelection extends React.Component {
         }
     }
 
-    _updateNameText(username){
+    _updateNameText(username) {
         console.log("here username = " + username)
-        this.setState({nameText: username});
+        this.setState({ nameText: username });
     }
 
     _toggleOverlay() {
@@ -61,19 +63,19 @@ export default class PlayerSelection extends React.Component {
                 err = PlayerConfig.NAME_LENGTH_ETEXT;
                 break;
             case PlayerConfig.NAME_OK:
-                PLAYERLIST.playerList.push({id: PLAYERLIST.id_cnt++, name: username, avatar_id: PLAYERLIST.id_cnt%AVATARLIST.nbAvatar})
+                PLAYERLIST.playerList.push({ id: PLAYERLIST.id_cnt++, name: username, avatar_id: PLAYERLIST.id_cnt % AVATARLIST.nbAvatar })
                 this._toggleOverlay()
                 break;
             default:
                 err = "Unknown error";
                 break;
         }
-        this.setState({nameError: err});
+        this.setState({ nameError: err });
     }
 
     render() {
         return (
-            
+
             <ImageBackground source={require('../assets/iglou_motif.png')} style={styles.background_image}>
                 <LinearGradient
                     // Background Linear Gradient
@@ -86,12 +88,18 @@ export default class PlayerSelection extends React.Component {
                         height: '40%',
                     }}
                 />
+
+
                 <View style={styles.container}>
+
+
                     <StatusBar style="light" />
 
 
                     {/* top logo + white area */}
                     <View style={styles.main_container}>
+
+
                         <View style={styles.logo_area}>
                             <Image source={require("../assets/logo_light_inline.png")}
                                 style={styles.logo_style} />
@@ -104,12 +112,16 @@ export default class PlayerSelection extends React.Component {
                                 keyExtractor={(item) => (item.id).toString()}
                                 renderItem={({ item }) => <Player info={item} />}
                             />
-                            <View style={styles.add_pb}>
-                                <AddPlayerButton onPress={() => this._toggleOverlay()} />
-                            </View>
+
+
+
+
+
+
 
                             {/* ***************** Player creation overlay *************************** */}
-                            <Overlay overlayStyle={styles.overlay}
+
+                            { /* <Overlay overlayStyle={styles.overlay}
 
                                 isVisible={this.state.visibleOverlay}
                                 onBackdropPress={() => this._toggleOverlay()}>
@@ -125,11 +137,21 @@ export default class PlayerSelection extends React.Component {
 
                                     </View>
                                 </View>
-                            </Overlay>
+                            </Overlay> */}
 
                             {/* ******************************************************************** */}
                         </View>
-                    </View>
+                    </View>                      
+                        <KeyboardAccs bottom={0} verticalOffset={0}>
+                        <View style={{ flexDirection: 'row', height: 40 }}>
+                            <TextInput
+                                style={{ flex: 1, height: 30, borderWidth: 1 }}
+                                placeholder='Click me!' />
+
+                        </View>
+                    </KeyboardAccs>
+
+
                 </View>
 
             </ImageBackground >

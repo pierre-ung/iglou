@@ -1,7 +1,7 @@
 // /!\ Remove tests names 
 var id_cnt = 0
 var playerList = [
-    /* Element exemple
+    /* Element:
     {
         id: 0,
         name: "Gloubi",
