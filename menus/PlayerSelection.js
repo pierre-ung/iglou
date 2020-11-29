@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet, Text, View, ImageBackground, Image, FlatList, ScrollView, KeyboardAvoidingView
+    StyleSheet, Text, View, ImageBackground, Image, FlatList, ScrollView, KeyboardAvoidingView,Dimensions
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,6 +18,9 @@ import AVATARLIST from '../playerInfo/AvatarList.js';
 import KeyboardAccs from '../components/KeyboardAccs.js'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import PlayerInputButton from '../components/PlayerInputButton.js'
+
+const isGameReady = true
 
 export default class PlayerSelection extends React.Component {
     constructor(props) {
@@ -78,7 +81,7 @@ export default class PlayerSelection extends React.Component {
 
             <ImageBackground source={require('../assets/iglou_motif.png')} style={styles.background_image}>
                 <LinearGradient
-                    // Background Linear Gradient
+                      // Background Linear Gradient
                     colors={['transparent', 'rgba(0,0,0,0.4)']}
                     style={{
                         position: 'absolute',
@@ -99,7 +102,6 @@ export default class PlayerSelection extends React.Component {
                     {/* top logo + white area */}
                     <View style={styles.main_container}>
 
-
                         <View style={styles.logo_area}>
                             <Image source={require("../assets/logo_light_inline.png")}
                                 style={styles.logo_style} />
@@ -110,7 +112,7 @@ export default class PlayerSelection extends React.Component {
                                 style={styles.player_style}
                                 data={PLAYERLIST.playerList}
                                 keyExtractor={(item) => (item.id).toString()}
-                                renderItem={({ item }) => <Player info={item} />}
+                                renderItem={({ item }) => <Player info={item}/>}
                             />
 
 
@@ -141,12 +143,16 @@ export default class PlayerSelection extends React.Component {
 
                             {/* ******************************************************************** */}
                         </View>
-                    </View>                      
+                    </View>
                         <KeyboardAccs bottom={0} verticalOffset={0}>
-                        <View style={{ flexDirection: 'row', height: 40 }}>
+                        <View style={styles.playerInput}>
+                            <PlayerInputButton icon="md-settings" color="#ccc" iconColor="#404040"/>
                             <TextInput
-                                style={{ flex: 1, height: 30, borderWidth: 1 }}
-                                placeholder='Click me!' />
+                                style={styles.playerTextField}
+                                onChangeText={(text) => this._updateNameText(text)}
+                                placeholder='Enter player name' />
+                              <PlayerInputButton icon="plus" color="#ccc" iconColor="#404040" onPress={() => this._addPlayer(this.state.nameText)}/>
+                            <PlayerInputButton icon="arrow-right" color={isGameReady ? '#ff4E47' : '#111'} iconColor="#fff"/>
 
                         </View>
                     </KeyboardAccs>
@@ -164,40 +170,37 @@ export default class PlayerSelection extends React.Component {
 const styles = StyleSheet.create({
     background_image: {
         margin: -1,
-        flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
     },
     container: {
-        paddingTop: '20%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: '10%',
+        alignItems: 'center'
     },
     main_container: {
-        flex: 10,
-        alignItems: 'center'
+        display: 'flex',
+        alignItems: 'stretch',
     },
     logo_area: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     logo_style: {
-        flex: 1,
         width: 200,
         resizeMode: 'contain',
     },
     game_area: {
-        marginTop: 20,
-        flex: 7,
-        backgroundColor: '#ffffff',
-        width: 300,
+        flex: 5,
+        width: 0.9*Dimensions.get('window').width,
+        backgroundColor: '#fefefe',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         alignItems: 'center',
+        paddingTop: '3%'
 
     },
     player_style: {
-        width: '80%',
+        width: '90%',
 
     },
     add_pb: {
@@ -216,11 +219,23 @@ const styles = StyleSheet.create({
     input_name: {
         height: '50%',
         width: '100%',
-        textAlign: 'center',
         backgroundColor: "#FFFFFF",
         borderRadius: 20,
-        marginBottom: 0,
         fontSize: 24
+    },
+    playerInput:{
+      display:'flex',
+      paddingRight: 10,
+      paddingLeft: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      height: 50,
+    },
+    playerTextField:{
+       flex: 1,
+       fontSize: 18,
+       marginRight: 5,
+       marginLeft: 5,
     }
 
 });
