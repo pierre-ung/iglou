@@ -20,7 +20,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import PlayerInputButton from '../components/PlayerInputButton.js'
 
-const isGameReady = true
+const minPlayer = 3
 
 export default class PlayerSelection extends React.Component {
     constructor(props) {
@@ -73,7 +73,9 @@ export default class PlayerSelection extends React.Component {
                 err = "Unknown error";
                 break;
         }
+        this.textInput.clear();
         this.setState({ nameError: err });
+        console.log(PLAYERLIST.playerList.length)
     }
 
     render() {
@@ -148,11 +150,14 @@ export default class PlayerSelection extends React.Component {
                         <View style={styles.playerInput}>
                             <PlayerInputButton icon="md-settings" color="#ccc" iconColor="#404040"/>
                             <TextInput
+                                ref={input => { this.textInput = input }}
                                 style={styles.playerTextField}
                                 onChangeText={(text) => this._updateNameText(text)}
+                                autoFocus={true}
+                                onSubmitEditing={() =>this._addPlayer(this.state.nameText)}
                                 placeholder='Enter player name' />
                               <PlayerInputButton icon="plus" color="#ccc" iconColor="#404040" onPress={() => this._addPlayer(this.state.nameText)}/>
-                            <PlayerInputButton icon="arrow-right" color={isGameReady ? '#ff4E47' : '#111'} iconColor="#fff"/>
+                            <PlayerInputButton icon="arrow-right" color={PLAYERLIST.playerList.length>=minPlayer ? '#ff4E47' : '#EBADAA'} iconColor="#fff"/>
 
                         </View>
                     </KeyboardAccs>
