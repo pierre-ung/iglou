@@ -155,6 +155,7 @@ export default class PlayerSelection extends React.Component {
                                 onChangeText={(text) => this._updateNameText(text)}
                                 autoFocus={true}
                                 onSubmitEditing={() =>this._addPlayer(this.state.nameText)}
+                                blurOnSubmit={false}
                                 placeholder='Enter player name' />
                               <PlayerInputButton icon="plus" color="#ccc" iconColor="#404040" onPress={() => this._addPlayer(this.state.nameText)}/>
                             <PlayerInputButton icon="arrow-right" color={PLAYERLIST.playerList.length>=minPlayer ? '#ff4E47' : '#EBADAA'} iconColor="#fff"/>
