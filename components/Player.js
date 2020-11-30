@@ -3,6 +3,7 @@ import {
     StyleSheet, Text, View, ImageBackground, Image
 } from 'react-native';
 import AVATARLIST from '../playerInfo/AvatarList'
+import PLAYERLIST from '../playerInfo/PlayerList'
 import PlayerListButton from './PlayerListButton.js'
 
 function resolveImageFromID(id){
@@ -16,8 +17,14 @@ export default class Player extends React.Component{
       super()
     }
 
-    remove(){
+    remove(id){
+      const flist = this.props.flist;
+      var toDelIndex = PLAYERLIST.playerList.findIndex(x => x.id == id);
+      // id found
+      if(toDelIndex != -1)
+        PLAYERLIST.playerList.splice(toDelIndex, 1);
 
+      flist.setState({playerList: PLAYERLIST.playerList});
     }
 
     render(){
@@ -29,7 +36,7 @@ export default class Player extends React.Component{
               source={avatar} />
             <View style={styles.text_container}>
               <Text style={styles.player_name}>{playerInfo.name} </Text>
-              <PlayerListButton />
+              <PlayerListButton delAction={() => this.remove(playerInfo.id)}/>
             </View>
           </View>
         );

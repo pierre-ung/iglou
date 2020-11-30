@@ -29,6 +29,7 @@ export default class PlayerSelection extends React.Component {
             visibleOverlay: false,
             nameError: "",
             nameText: "",
+            playerList: PLAYERLIST.playerList
         }
     }
 
@@ -66,7 +67,7 @@ export default class PlayerSelection extends React.Component {
                 err = PlayerConfig.NAME_LENGTH_ETEXT;
                 break;
             case PlayerConfig.NAME_OK:
-                PLAYERLIST.playerList.push({ id: PLAYERLIST.id_cnt++, name: username, avatar_id: PLAYERLIST.id_cnt % AVATARLIST.nbAvatar })
+                PLAYERLIST.playerList.unshift({ id: PLAYERLIST.id_cnt++, name: username, avatar_id: PLAYERLIST.id_cnt % AVATARLIST.nbAvatar })
                 this._toggleOverlay()
                 break;
             default:
@@ -75,7 +76,6 @@ export default class PlayerSelection extends React.Component {
         }
         this.textInput.clear();
         this.setState({ nameError: err });
-        console.log(PLAYERLIST.playerList.length)
     }
 
     render() {
@@ -112,9 +112,10 @@ export default class PlayerSelection extends React.Component {
                         <View style={styles.game_area}>
                             <FlatList
                                 style={styles.player_style}
-                                data={PLAYERLIST.playerList}
+                                data={this.state.playerList}
+                                extraData={this.state}
                                 keyExtractor={(item) => (item.id).toString()}
-                                renderItem={({ item }) => <Player info={item}/>}
+                                renderItem={({ item }) => <Player info={item} flist={this}/>}
                             />
 
 
