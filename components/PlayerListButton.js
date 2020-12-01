@@ -7,12 +7,13 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   box:{
-    width: 25,
-    height: 25,
+    width: 40,
+    height: 40,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
+    marginRight: -8,
   }
 })
 

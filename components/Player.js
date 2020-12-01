@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     removeButton:{
       marginLeft: 'auto',
-      marginRight: 15,
+      marginRight: -100,
       alignSelf: 'center'
     }
 });
