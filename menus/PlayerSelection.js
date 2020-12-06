@@ -110,13 +110,14 @@ export default class PlayerSelection extends React.Component {
                         </View>
                         {/* white area */}
                         <View style={styles.game_area}>
+                        <Text style={styles.title}>Build Your Party!</Text>
                             <FlatList
+                                inverted={true}
                                 style={styles.player_style}
                                 data={this.state.playerList}
                                 extraData={this.state}
                                 keyExtractor={(item) => (item.id).toString()}
-                                renderItem={({ item }) => <Player info={item} flist={this}/>}
-                            />
+                                renderItem={({ item }) => <Player info={item} flist={this}/>}/>
 
 
 
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     logo_area: {
-        flex: 1,
+        height: 150,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     },
     player_style: {
         width: '90%',
-
+        marginBottom: 60,
     },
     add_pb: {
         flex: 3,
@@ -243,6 +244,15 @@ const styles = StyleSheet.create({
        fontSize: 18,
        marginRight: 5,
        marginLeft: 5,
+    },
+    title:{
+      width: '100%',
+      fontSize: 24,
+      fontWeight: "bold",
+      color: "#ff4e47",
+      marginTop: 5,
+      marginBottom: 10,
+      textAlign: "center"
     }
 
 });
