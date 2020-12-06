@@ -6,9 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/app_icon_foreground.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1b1f3b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,31 +21,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/app_icon_foreground.png",
+        "backgroundImage": "./assets/app_icon_background.png"
+      },
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "androidNavigationBar": {
-       /*
-          Determines to show or hide bottom navigation bar.
-          "true" to show, "false" to hide.
-          If set to false, status bar will also be hide. As it's a general rule to hide both status bar and navigation bar on Android developer official docs.
-        */
-      //"visible": "true",
-      /*
-        Configure the navigation bar icons to have light or dark color.
-        Valid values: "light-content", "dark-content".
-      */
       "barStyle": "light-content",
-
-      /*
-        Configuration for android navigation bar.
-        6 character long hex color string, eg: "#000000"
-      */
       "backgroundColor": "#0D0F1C"
-  }
+    }
   }
 }
