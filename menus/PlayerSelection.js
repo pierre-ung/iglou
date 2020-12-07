@@ -111,13 +111,16 @@ export default class PlayerSelection extends React.Component {
                         {/* white area */}
                         <View style={styles.game_area}>
                         <Text style={styles.title}>Build Your Party!</Text>
-                            <FlatList
+                            {PLAYERLIST.playerList.length == 0 ?
+                              <View style={styles.no_player}><Image source={require("../assets/Party_popper.png")} style={styles.party_popper}/></View>
+                            :<FlatList
                                 inverted={true}
                                 style={styles.player_style}
                                 data={this.state.playerList}
                                 extraData={this.state}
                                 keyExtractor={(item) => (item.id).toString()}
                                 renderItem={({ item }) => <Player info={item} flist={this}/>}/>
+                            }
 
 
 
@@ -178,6 +181,7 @@ export default class PlayerSelection extends React.Component {
 const styles = StyleSheet.create({
     background_image: {
         margin: -1,
+        backgroundColor: 'transparent',
         resizeMode: "cover",
     },
     container: {
@@ -253,6 +257,16 @@ const styles = StyleSheet.create({
       marginTop: 5,
       marginBottom: 10,
       textAlign: "center"
+    },
+    party_popper:{
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        width: 150,
+        height: 150,
+    },
+    no_player:{
+      flex: 1,
+      marginBottom: 60,
     }
 
 });
