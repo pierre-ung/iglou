@@ -1,4 +1,3 @@
-// /!\ Remove tests names 
 var id_cnt = 0
 var playerList = [
     /* Element:
