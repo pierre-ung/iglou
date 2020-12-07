@@ -13,10 +13,15 @@ function readCouple(couple){
 const coupleMax = ({fst, scd}) => Math.max(fst, scd);
 const coupleMin = ({fst, scd}) => Math.min(fst, scd);
 
-/* var data = fs.readFileSync('../tests/testSet.csv')
-    .toString() // convert Buffer to string
-    .split('\n') // split string to lines
-    .map(e => e.trim()) // remove white spaces for each line
-    .map(e => e.split(',').map(e => e.trim())); // split each line to array
+function csvToArray(path){
+    var res = 
 
-console.log(data); */
+    fs.readFileSync(path)
+    .toString() // convert Buffer to string
+    .split(';') // split cols
+    .map(e => e.split('\n').map(e => e.trim())); // split each line to array
+
+    return res;
+}
+var a = csvToArray('../test/testSet.csv');
+console.log(a);
