@@ -3,10 +3,8 @@
 
 
 export default class CardClass {
-    static idCnt = 0;
-    
-    constructor(textFR, textEN, difficulty, nbSip, nbPlyr, type, lifetime, lifecycle) {
-        this.id = idCnt++;
+    constructor(id, textFR, textEN, difficulty, nbSip, nbPlyr, type, lifetime, lifecycle) {
+        this.id = id;
         this.textFR = textFR;
         this.textEN = textEN;
         this.difficulty = difficulty;
@@ -18,6 +16,7 @@ export default class CardClass {
     }
 
     // Getters
+    getID(){return this.id;}
     getTextFR(){return this.textFR;}
     getTextEN(){return this.textFR;}
     getDifficulty(){return this.difficulty;}

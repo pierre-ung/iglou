@@ -18,7 +18,11 @@ import AVATARLIST from '../playerInfo/AvatarList.js';
 import KeyboardAccs from '../components/KeyboardAccs.js'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import PlayerInputButton from '../components/PlayerInputButton.js'
+import PlayerInputButton from '../components/PlayerInputButton.js';
+
+import PlayerClass from '../playerInfo/PlayerClass';
+
+import * as deck from '../deckGeneration/Generator.js';
 
 const minPlayer = 3
 
@@ -26,7 +30,6 @@ export default class PlayerSelection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            visibleOverlay: false,
             nameError: "",
             nameText: "",
             playerList: PLAYERLIST.playerList
@@ -34,15 +37,7 @@ export default class PlayerSelection extends React.Component {
     }
 
     _updateNameText(username) {
-        console.log("here username = " + username)
         this.setState({ nameText: username });
-    }
-
-    _toggleOverlay() {
-        this.setState({
-            visibleOverlay: !this.state.visibleOverlay,
-            nameError: ""
-        });
     }
 
     _checkUsername(username) {
@@ -67,8 +62,7 @@ export default class PlayerSelection extends React.Component {
                 err = PlayerConfig.NAME_LENGTH_ETEXT;
                 break;
             case PlayerConfig.NAME_OK:
-                PLAYERLIST.playerList.unshift({ id: PLAYERLIST.id_cnt++, name: username, avatar_id: PLAYERLIST.id_cnt % AVATARLIST.nbAvatar })
-                this._toggleOverlay()
+                PLAYERLIST.playerList.unshift(new PlayerClass(PLAYERLIST.id_cnt++, username, PLAYERLIST.id_cnt % AVATARLIST.nbAvatar)); 
                 break;
             default:
                 err = "Unknown error";
@@ -76,6 +70,14 @@ export default class PlayerSelection extends React.Component {
         }
         this.textInput.clear();
         this.setState({ nameError: err });
+
+
+
+
+        /////////////////////////// TESTS ////////////////////////////
+        
+        //deck.generateSimpleGame(20, 10);
+        /////////////////////////////////////////////////////////////
     }
 
     render() {
@@ -118,7 +120,7 @@ export default class PlayerSelection extends React.Component {
                                 style={styles.player_style}
                                 data={this.state.playerList}
                                 extraData={this.state}
-                                keyExtractor={(item) => (item.id).toString()}
+                                keyExtractor={(item) => (item.getID()).toString()}
                                 renderItem={({ item }) => <Player info={item} flist={this}/>}/>
                             }
 

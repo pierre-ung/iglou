@@ -29,14 +29,14 @@ export default class Player extends React.Component{
 
     render(){
         const playerInfo = this.props.info
-        var avatar = resolveImageFromID(playerInfo.avatar_id);
+        var avatar = resolveImageFromID(playerInfo.getAvatarID());
         return(
           <View style={styles.listItem}>
             <Image  style={styles.avatar}
               source={avatar} />
             <View style={styles.text_container}>
-              <Text style={styles.player_name}>{playerInfo.name} </Text>
-              <PlayerListButton delAction={() => this.remove(playerInfo.id)}/>
+              <Text style={styles.player_name}>{playerInfo.getName()} </Text>
+              <PlayerListButton delAction={() => this.remove(playerInfo.getID())}/>
             </View>
           </View>
         );
