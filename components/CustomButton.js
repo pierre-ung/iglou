@@ -26,6 +26,7 @@ class Button extends React.Component {
           text: props.text,
           onPress: this.props.onPress,
           height: this.props.height,
+          radius: this.props.bR
         }
         this.HandleClick = this.HandleClick.bind(this)
     }
@@ -77,7 +78,7 @@ class Button extends React.Component {
                 width: '100%',
                 backgroundColor: this.state.color != null && this.state.disabled ? "#111" : this.state.color,
                 height: this.props.height,
-                borderRadius: 30,
+                borderRadius: this.state.radius ? this.state.radius: 50,
                 justifyContent: 'center',
                 alignItems: 'center',
               }
