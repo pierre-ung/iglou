@@ -6,9 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 //Components homemade
 import LogoArea from '../components/LogoArea.js';
-import Button from '../components/Button.js';
-import AddPlayerButton from '../components/AddPlayerButton.js';
-import PLAYERLIST from '../playerInfo/PlayerList.js'
+import Button from '../components/CustomButton.js';
 export default class MainMenu extends React.Component {
 
     render() {

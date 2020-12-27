@@ -5,7 +5,7 @@ import {createAppContainer} from 'react-navigation'
 import {createStackNavigator, TransitionPresets} from 'react-navigation-stack'
 import MainMenu from './MainMenu.js'
 import PlayerSelection from './PlayerSelection.js'
-
+import GameMenu from './GameMenu.js'
 
 const AppStackNav = createStackNavigator(
     {
@@ -14,6 +14,9 @@ const AppStackNav = createStackNavigator(
     },
     PlayerSelect: {
         screen: PlayerSelection
+    },
+    Game: {
+        screen: GameMenu
     },
 },
 {

@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 //Components homemade
 import LogoArea from '../components/LogoArea.js'
-import Button from '../components/Button.js'
+import Button from '../components/CustomButton.js'
 import { Component } from 'react';
 import PLAYERLIST from '../playerInfo/PlayerList'
 import Player from '../components/Player.js';
@@ -27,6 +27,7 @@ import * as deck from '../deckGeneration/Generator.js';
 const minPlayer = 3
 
 export default class PlayerSelection extends React.Component {
+    
     constructor(props) {
         super(props)
         this.state = {
@@ -76,13 +77,14 @@ export default class PlayerSelection extends React.Component {
 
         /////////////////////////// TESTS ////////////////////////////
         
-        //deck.generateSimpleGame(20, 10);
+        
         /////////////////////////////////////////////////////////////
     }
 
     render() {
+        const { navigate } = this.props.navigation
         return (
-
+            
             <ImageBackground source={require('../assets/iglou_motif.png')} style={styles.background_image}>
                 <LinearGradient
                       // Background Linear Gradient
@@ -165,7 +167,7 @@ export default class PlayerSelection extends React.Component {
                                 blurOnSubmit={false}
                                 placeholder='Enter player name' />
                               <PlayerInputButton icon="plus" color="#ccc" iconColor="#404040" onPress={() => this._addPlayer(this.state.nameText)}/>
-                            <PlayerInputButton icon="arrow-right" color={PLAYERLIST.playerList.length>=minPlayer ? '#ff4E47' : '#EBADAA'} iconColor="#fff"/>
+                            <PlayerInputButton icon="arrow-right" onPress={() => PLAYERLIST.playerList.length>=minPlayer?navigate('Game'):null} color={PLAYERLIST.playerList.length>=minPlayer ? '#ff4E47' : '#EBADAA'} iconColor="#fff"/>
 
                         </View>
                     </KeyboardAccs>
