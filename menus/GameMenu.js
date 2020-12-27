@@ -13,9 +13,11 @@ export default class MainMenu extends React.Component {
 
 
     //TODO : renderCardFunction
-    renderCard = (card) => { return (<View style={styles.card}><Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan ultricies tempus. Aenean semper, ipsum quis imperdiet tristique, metus libero egestas odio, pharetra consequat eros est vitae odio. Nulla sollicitudin arcu commodo congue dignissim.{"\n"}
-    {"\n"}
-    Diff:{card.getDifficulty()}</Text></View>); }
+    renderCard = (card) => {
+        return (<View style={styles.card}><Text>{card.getTextFR()}{"\n"}
+            {"\n"}
+    Diff:{card.getDifficulty()}</Text></View>);
+    }
     cards = deck.generateSimpleGame(50, 10);
     render() {
         const { navigate } = this.props.navigation
@@ -33,7 +35,7 @@ export default class MainMenu extends React.Component {
                     }}
                 />
                 <View style={styles.main_container}>
-                    <Image source={require("../assets/logo_light_inline.png")} style={styles.logo}/>
+                    <Image source={require("../assets/logo_light_inline.png")} style={styles.logo} />
                     <View style={styles.swiper_container}>
                         <Swiper
                             ref={swiper => {
@@ -46,7 +48,15 @@ export default class MainMenu extends React.Component {
                             disableBottomSwipe={true}
                             disableTopSwipe={true}
                             backgroundColor='transparent'
+                            marginBottom={100}
+                            onSwipedAll={() => {navigate('MainMenu')}}
                         />
+                    </View>
+
+                    <View style={styles.swipe_buttons}>
+                        <Button onPress={() => this.swiper.swipeLeft()} text='X' color='red' />
+                        <Text style={{marginRight: 20}}></Text>
+                        <Button onPress={() => this.swiper.swipeRight()} text='V' color='green' />
                     </View>
                 </View>
 
@@ -54,10 +64,7 @@ export default class MainMenu extends React.Component {
         );
     }
 }
-// <View style={styles.swipe_buttons}>
-//     <Button onPress={() => this.swiper.swipeLeft()} text='X' color='red' bR={100} />
-//     <Button onPress={() => this.swiper.swipeRight()} text='v' color='green'  bR={100}/>
-// </View>
+
 
 
 const styles = StyleSheet.create({
@@ -74,6 +81,7 @@ const styles = StyleSheet.create({
     },
     swiper_container: {
         display: 'flex',
+        zIndex: 1,
         flex: 1,
         alignItems: 'center',
         alignContent: 'center',
@@ -84,26 +92,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: 'auto',
-        height: '80%',
+        height: '70%',
         padding: '7%',
         borderRadius: 50,
         borderWidth: 2,
         borderColor: '#E8E8E8',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        
     },
     swipe_buttons: {
         flex: 0.2,
         paddingBottom: '10%',
         alignSelf: 'center',
-        alignContent: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        width: '25%'
+        width: "35%"
     },
-    logo :{
-      height: 50,
-      alignSelf: "center",
-      resizeMode: 'contain',
+    logo: {
+        height: 50,
+        alignSelf: "center",
+        resizeMode: 'contain',
     }
 
 });

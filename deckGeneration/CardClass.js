@@ -13,6 +13,7 @@ export default class CardClass {
         this.type = type;
         this.lifetime = lifetime;
         this.lifecycle = lifecycle;
+        this.players = [];
     }
 
     // Getters
