@@ -8,17 +8,58 @@ import Swiper from 'react-native-deck-swiper';
 import Button from '../components/CustomButton.js'
 import PLAYERLIST from '../playerInfo/PlayerList.js'
 import * as deck from '../deckGeneration/Generator.js'
+import types from '../deckGeneration/CardTypes.js'
 
 export default class MainMenu extends React.Component {
 
 
-    //TODO : renderCardFunction
+    ///////////////////////////////// RENDER CARD (Set each card style) ///////////////////////////////
     renderCard = (card) => {
-        return (<View style={styles.card}><Text>{card.getTextFR()}{"\n"}
-            {"\n"}
-    Diff:{card.getDifficulty()}</Text></View>);
+        var currentStyle = {
+            card: {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 'auto',
+                height: '70%',
+                padding: '7%',
+                borderRadius: 50,
+                borderWidth: 2,
+                borderColor: '#E8E8E8',
+                backgroundColor: 'white', 
+            }
+        };
+        switch (card.getType()) {
+            case types.NORMAL:
+                currentStyle.card.backgroundColor = 'white';
+                break;
+            case types.TRUTH_OR_DARE:
+                currentStyle.card.backgroundColor = '#ffa8a8'
+                break;
+            case types.I_NEVER:
+                currentStyle.card.backgroundColor = '#a8deff'
+                break;
+            case types.TOUR:
+                currentStyle.card.backgroundColor = '#82c757'
+                break;
+            case types.PERSO:
+                currentStyle.card.backgroundColor = '#d0ce71'
+                break;
+            case types.PERSO:
+                currentStyle.card.backgroundColor = '#71d0c2'
+                break;
+
+            default:
+                break;
+        }
+        return (<View style={currentStyle.card}><Text>{card.getTextFR()}{"\n"}</Text></View>);
     }
-    cards = deck.generateSimpleGame(50, 10);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //generate deck
+    cards = deck.generateSimpleGame(50, 20);
+
     render() {
         const { navigate } = this.props.navigation
         return (
@@ -44,7 +85,7 @@ export default class MainMenu extends React.Component {
                             cards={this.cards}
                             renderCard={this.renderCard}
                             stackSize={3}
-                            stackSeparation={12}
+                            stackSeparation={0}
                             disableBottomSwipe={true}
                             disableTopSwipe={true}
                             backgroundColor='transparent'
@@ -87,19 +128,6 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
     },
-    card: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 'auto',
-        height: '70%',
-        padding: '7%',
-        borderRadius: 50,
-        borderWidth: 2,
-        borderColor: '#E8E8E8',
-        backgroundColor: 'white',
-        
-    },
     swipe_buttons: {
         flex: 0.2,
         paddingBottom: '10%',
@@ -112,6 +140,6 @@ const styles = StyleSheet.create({
         height: 50,
         alignSelf: "center",
         resizeMode: 'contain',
-    }
-
+    },
+    
 });

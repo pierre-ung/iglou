@@ -13,6 +13,16 @@ function readCouple(couple) {
 const coupleMax = ({ fst, scd }) => Math.max(fst, scd);
 const coupleMin = ({ fst, scd }) => Math.min(fst, scd);
 
+
+
+    function escapeRegExp(string){
+        return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+        
+    function replaceAll(str, term, replacement) {
+        return str.replace(new RegExp(escapeRegExp(term), 'g'), replacement);
+    }
+
 function gerenateArray() {
     const file = cardsFile;
     var card, id, textFR, textEN, difficulty, nbSip, nbPlyr, type, lifetime, lifecycle;
@@ -49,13 +59,12 @@ function initCard(card){
     // Assign players
     var nbPlayers = card.getNbPlayer();
     card.players = [];
-    var playerList = [...PLAYERLIST.playerList];
-    playerList = shuffle(playerList);
     for(var i=0; i<nbPlayers; i++){
-        card.players.push(playerList[i]);
-        card.textFR = card.textFR.replace("${p"+i+"}", playerList[i].getName()); 
-        card.textEN = card.textEN.replace("${p"+i+"}", playerList[i].getName());
-       }
+        var player = selectPlayer(card.players);
+        card.players.push(player)
+        card.textFR = replaceAll(card.textFR, "${p"+i+"}", player.getName()); 
+        card.textEN = replaceAll(card.textFR, "${p"+i+"}", player.getName());
+    }
     
 
     //Assign sips
@@ -63,23 +72,22 @@ function initCard(card){
     var minSip = coupleMin(minmaxSip);
     var maxSip = coupleMax(minmaxSip);
     var sip = randomInteger(minSip, maxSip);
-
-    card.textFR = card.textFR.replace("${n}", sip);
-    card.textEN = card.textEN.replace("${n}", sip);
+    
+    card.textFR = replaceAll(card.textFR, "${n}", sip);
+    card.textEN = replaceAll(card.textEN, "${n}", sip);
     
     for(var i=0; i<20; i++){
-        card.textFR = card.textFR.replace("${n+"+i+"}", sip+i);
-        card.textEN = card.textEN.replace("${n+"+i+"}", sip+i);
+        card.textFR = replaceAll(card.textFR, "${n+"+i+"}", sip+i);
+        card.textEN = replaceAll(card.textEN, "${n+"+i+"}", sip+i);
 
-        card.textFR = card.textFR.replace("${n-"+i+"}", sip-i);
-        card.textEN = card.textEN.replace("${n-"+i+"}", sip-i);
+        card.textFR = replaceAll(card.textFR, "${n-"+i+"}", sip-i);
+        card.textEN = replaceAll(card.textEN, "${n-"+i+"}", sip-i);
 
-        card.textFR = card.textFR.replace("${n*"+i+"}", sip*i);
-        card.textEN = card.textEN.replace("${n*"+i+"}", sip*i);
+        card.textFR = replaceAll(card.textFR, "${n*"+i+"}", sip*i);
+        card.textEN = replaceAll(card.textEN, "${n*"+i+"}", sip*i);
     }
 
 
-    console.log(card.textFR);
 
     return;
 }
@@ -88,12 +96,31 @@ function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
+function selectPlayer(alreadySelected){
+    var availiable = [...PLAYERLIST.playerList];
+    //Remove already selected players from the list
+    for(var i=0; i<alreadySelected.length; i++){
+        availiable = availiable.filter(p => p.getID() != alreadySelected[i]);
+    }
+
+    //Sort by selectedTime > and return the first
+    var player = (availiable.sort((p1, p2) => p1.getSelectedTime() - p2.getSelectedTime()))[0];
+    player.selectedTime++;
+    return player;
+}
+
 /**
  * Generate a simple game (Only cards where lifetime && lifecycle = 0:0)
  * @param {*} wantedDifficulty 
  * @param {*} wantedDeckSize 
  */
 function generateSimpleGame(wantedDifficulty, wantedDeckSize) {
+
+    //Reset player selected times
+    for(var i=0; i<PLAYERLIST.playerList; i++){
+        PLAYERLIST.playerList[i].selectedTime = 0;
+    }
+
     var cards = (shuffle(this.gerenateArray())).filter(c => c.getLifetime() == '0:0' && c.getLifecycle() == '0:0' && c.getNbPlayer() <= PLAYERLIST.playerList.length);
     var availiableCards = [...cards];
     var result = [];
@@ -137,7 +164,7 @@ function generateSimpleGame(wantedDifficulty, wantedDeckSize) {
             cardDifficulty = bestCard.getDifficulty();
             score = Math.abs(wantedDifficulty - ((sumDifficulty+cardDifficulty)/(currentDeckSize+1)))
             for(var j=0; j<availiableCards.length; j++){
-                tryCard = availiableCards[i];
+                tryCard = availiableCards[j];
                 cardDifficulty = tryCard.getDifficulty();
                 tryScore = Math.abs(wantedDifficulty - ((sumDifficulty+cardDifficulty)/(currentDeckSize+1)));
                 if(tryScore < score){
@@ -149,10 +176,11 @@ function generateSimpleGame(wantedDifficulty, wantedDeckSize) {
             sumDifficulty += bestCard.getDifficulty();
             result.push(bestCard);
             initCard(bestCard);
-            availiableCards = availiableCards.filter(aCard => aCard.getID() != bestCard.getID);
+            availiableCards = availiableCards.filter(aCard => aCard.getID() != bestCard.getID());
         }
     }
-    
+    console.log("Deck size = " + result.length);
+    console.log("Availiable cards = " + availiableCards.length);
     return result.sort((c1, c2) => c1.getDifficulty()-c2.getDifficulty());
 }
 

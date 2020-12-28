@@ -4,7 +4,8 @@ var playerList = [
     {
         id: 0,
         name: "Gloubi",
-        avatar_id: 0
+        avatar_id: 0,
+        selectedTime: 0
     }
     */
 ]

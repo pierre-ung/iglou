@@ -24,6 +24,7 @@
         "foregroundImage": "./assets/app_icon_foreground_text.png",
         "backgroundImage": "./assets/app_icon_background.png"
       },
+      "package": "com.pung.Iglou_drinking_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
