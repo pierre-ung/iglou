@@ -24,11 +24,13 @@ export default class PlayerListButton extends React.Component{
           width: this.props.size,
           height: this.props.size,
           borderRadius: this.props.size/2,
+          marginLeft: this.props.size/10,
+          marginRight: this.props.size/10,
           backgroundColor: this.props.color,
           ...styles.box
         }}
           onPress={this.props.onPress}>
-        <FontAwesome name="close" size={100} color="rgba(256,256,256,0.9)" />
+        <FontAwesome name="close" size={80} color="rgba(256,256,256,0.9)" />
       </TouchableOpacity>
     )
   }

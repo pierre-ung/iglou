@@ -106,15 +106,15 @@ export default class MainMenu extends React.Component {
                             disableBottomSwipe={true}
                             disableTopSwipe={true}
                             backgroundColor='transparent'
-                            marginBottom={100}
+                            marginTop={-20}
+                            marginBottom={20}
                             onSwipedAll={() => {navigate('MainMenu')}}
                         />
                     </View>
 
                     <View style={styles.swipe_buttons}>
-                        <Button onPress={() => this.swiper.swipeLeft()} color='red' size={100} />
-                        <Text style={{marginRight: 20}}></Text>
-                        <Button onPress={() => this.swiper.swipeRight()} color='green' size={100} />
+                        <Button onPress={() => this.swiper.swipeLeft()} color='hsl(354, 77%, 55%)' size={100} />
+                        <Button onPress={() => this.swiper.swipeRight()} color='hsl(164, 100%, 40%)' size={100} />
                     </View>
                 </View>
 
