@@ -102,7 +102,7 @@ export default class MainMenu extends React.Component {
                             cards={this.cards}
                             renderCard={this.renderCard}
                             stackSize={3}
-                            stackSeparation={0}
+                            stackSeparation={8}
                             disableBottomSwipe={true}
                             disableTopSwipe={true}
                             backgroundColor='transparent'
