@@ -23,6 +23,7 @@ export default class MainMenu extends React.Component {
 
     ///////////////////////////////// RENDER CARD (Set each card style) ///////////////////////////////
     renderCard = (card) => {
+        const { navigate } = this.props.navigation;
         var currentStyle = {
             card: {
                 display: 'flex',
@@ -41,6 +42,7 @@ export default class MainMenu extends React.Component {
               textAlign: 'center'
             }
         };
+        try{
         switch (card.getType()) {
             case types.NORMAL:
                 currentStyle.card.backgroundColor = '#fafafa';
@@ -72,11 +74,16 @@ export default class MainMenu extends React.Component {
         }
         return (<View style={currentStyle.card}><Text style={currentStyle.copy}>{card.getTextFR()}{"\n"}</Text></View>);
     }
+    catch(e){
+        navigate('MainMenu');
+        return;
+    }
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     //generate deck
-    cards = deck.generateSimpleGame(50, 20);
+    cards = deck.generateSimpleGame(20, 30);
 
     render() {
         const { navigate } = this.props.navigation
@@ -108,7 +115,7 @@ export default class MainMenu extends React.Component {
                             disableTopSwipe={true}
                             backgroundColor='transparent'
                             marginTop={-20}
-                            marginBottom={20}
+                            marginBottom={40}
                             onSwipedAll={() => {navigate('MainMenu')}}
                         />
                     </View>
