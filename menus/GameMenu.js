@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-deck-swiper';
 import Button from '../components/SwipeButton.js'
+import Button2 from '../components/SwipeButton0.js'
 import PLAYERLIST from '../playerInfo/PlayerList.js'
 import * as deck from '../deckGeneration/Generator.js'
 import types from '../deckGeneration/CardTypes.js'
@@ -113,8 +114,8 @@ export default class MainMenu extends React.Component {
                     </View>
 
                     <View style={styles.swipe_buttons}>
-                        <Button onPress={() => this.swiper.swipeLeft()} color='hsl(354, 77%, 55%)' size={100} />
-                        <Button onPress={() => this.swiper.swipeRight()} color='hsl(164, 100%, 40%)' size={100} />
+                        <Button onPress={() => this.swiper.swipeLeft()} color='hsl(354, 77%, 55%)' size={100}/>
+                        <Button2 onPress={() => this.swiper.swipeRight()} color='hsl(164, 100%, 40%)' size={100}/>
                     </View>
                 </View>
 
