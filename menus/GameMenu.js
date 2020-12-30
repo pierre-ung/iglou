@@ -5,13 +5,20 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-deck-swiper';
-import Button from '../components/CustomButton.js'
+import Button from '../components/SwipeButton.js'
 import PLAYERLIST from '../playerInfo/PlayerList.js'
 import * as deck from '../deckGeneration/Generator.js'
 import types from '../deckGeneration/CardTypes.js'
+import {
+  useFonts,
+  NotoSans_400Regular,
+  NotoSans_400Regular_Italic,
+  NotoSans_500Medium,
+  NotoSans_700Bold,
+  NotoSans_700Bold_Italic
+} from '@expo-google-fonts/noto-sans'
 
 export default class MainMenu extends React.Component {
-
 
     ///////////////////////////////// RENDER CARD (Set each card style) ///////////////////////////////
     renderCard = (card) => {
@@ -26,37 +33,47 @@ export default class MainMenu extends React.Component {
                 borderRadius: 50,
                 borderWidth: 2,
                 borderColor: '#E8E8E8',
-                backgroundColor: 'white', 
+                backgroundColor: 'white',
+            },
+            copy: {
+              fontSize: 24,
+              textAlign: 'center'
             }
         };
         switch (card.getType()) {
             case types.NORMAL:
                 currentStyle.card.backgroundColor = 'white';
+                currentStyle.card.borderColor = 'white';
+                currentStyle.copy.color = '#2a2a2a';
                 break;
             case types.TRUTH_OR_DARE:
-                currentStyle.card.backgroundColor = '#ffa8a8'
+                currentStyle.card.backgroundColor = 'hsl(346, 88%, 58%)';
+                currentStyle.card.borderColor = 'hsl(346, 88%, 50%)';
                 break;
             case types.I_NEVER:
-                currentStyle.card.backgroundColor = '#a8deff'
+                currentStyle.card.backgroundColor = 'hsl(164, 96%, 41%)';
+                currentStyle.card.borderColor = 'hsl(164, 96%, 26%)';
+                currentStyle.copy.color = '#efefef';
                 break;
             case types.TOUR:
-                currentStyle.card.backgroundColor = '#82c757'
+                currentStyle.card.backgroundColor = 'hsl(195, 87%, 46%)';
+                currentStyle.card.borderColor = 'hsl(195, 87%, 30%)';
+                currentStyle.copy.color = '#efefef';
                 break;
             case types.PERSO:
-                currentStyle.card.backgroundColor = '#d0ce71'
-                break;
-            case types.PERSO:
-                currentStyle.card.backgroundColor = '#71d0c2'
+                currentStyle.card.backgroundColor = 'hsl(42, 100%, 67%)';
+                currentStyle.card.borderColor = 'hsl(42, 100%, 50%)';
+                currentStyle.copy.color = '#2a2a2a';
                 break;
 
             default:
                 break;
         }
-        return (<View style={currentStyle.card}><Text>{card.getTextFR()}{"\n"}</Text></View>);
+        return (<View style={currentStyle.card}><Text style={currentStyle.copy}>{card.getTextFR()}{"\n"}</Text></View>);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //generate deck
     cards = deck.generateSimpleGame(50, 20);
 
@@ -95,9 +112,9 @@ export default class MainMenu extends React.Component {
                     </View>
 
                     <View style={styles.swipe_buttons}>
-                        <Button onPress={() => this.swiper.swipeLeft()} text='X' color='red' />
+                        <Button onPress={() => this.swiper.swipeLeft()} color='red' size={100} />
                         <Text style={{marginRight: 20}}></Text>
-                        <Button onPress={() => this.swiper.swipeRight()} text='V' color='green' />
+                        <Button onPress={() => this.swiper.swipeRight()} color='green' size={100} />
                     </View>
                 </View>
 
@@ -141,5 +158,5 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         resizeMode: 'contain',
     },
-    
+
 });

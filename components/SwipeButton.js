@@ -1,0 +1,35 @@
+import React from 'react'
+import {
+  TouchableOpacity,StyleSheet
+}from 'react-native'
+import { FontAwesome } from '@expo/vector-icons';
+
+const styles = StyleSheet.create({
+  box:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '4%'
+  }
+})
+
+export default class PlayerListButton extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <TouchableOpacity style={{
+          width: this.props.size,
+          height: this.props.size,
+          borderRadius: this.props.size/2,
+          backgroundColor: this.props.color,
+          ...styles.box
+        }}
+          onPress={this.props.onPress}>
+        <FontAwesome name="close" size={100} color="rgba(256,256,256,0.9)" />
+      </TouchableOpacity>
+    )
+  }
+}
