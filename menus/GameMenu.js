@@ -43,8 +43,8 @@ export default class MainMenu extends React.Component {
         };
         switch (card.getType()) {
             case types.NORMAL:
-                currentStyle.card.backgroundColor = 'white';
-                currentStyle.card.borderColor = 'white';
+                currentStyle.card.backgroundColor = '#fafafa';
+                currentStyle.card.borderColor = '#cfcfcf';
                 currentStyle.copy.color = '#2a2a2a';
                 break;
             case types.TRUTH_OR_DARE:
@@ -64,7 +64,7 @@ export default class MainMenu extends React.Component {
             case types.PERSO:
                 currentStyle.card.backgroundColor = 'hsl(42, 100%, 67%)';
                 currentStyle.card.borderColor = 'hsl(42, 100%, 50%)';
-                currentStyle.copy.color = '#2a2a2a';
+                currentStyle.copy.color = '#2f2f2f';
                 break;
 
             default:
